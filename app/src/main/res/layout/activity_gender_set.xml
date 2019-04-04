@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.GenderSetActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_gender_male"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp">
+
+        <ImageView
+            android:id="@+id/iv_male"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:src="@drawable/gender_setting_boy" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_male"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:paddingVertical="6dp"
+            android:text="男 \n Boy"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_gender_female"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp">
+
+        <ImageView
+            android:id="@+id/iv_female"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:src="@drawable/gender_setting_girl" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_female"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:paddingVertical="6dp"
+            android:text="女 \n Girl"
+            android:textColor="@color/grey"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

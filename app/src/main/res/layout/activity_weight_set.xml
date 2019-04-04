@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp" />
+
+    <yanzhikai.ruler.KgNumberLayout
+        android:id="@+id/knl_bottom_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:kgTextSize="20sp"
+        app:scaleTextSize="50sp" />
+
+    <yanzhikai.ruler.BooheeRuler
+        android:id="@+id/br_top_head"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        app:bigScaleLength="40dp"
+        app:bigScaleWidth="2.5dp"
+        app:count="10"
+        app:currentScale="600"
+        app:cursorDrawable="@drawable/cursor_shape"
+        app:cursorHeight="45dp"
+        app:cursorWidth="4dp"
+        app:maxScale="2000"
+        app:minScale="400"
+        app:numberTextSize="22sp"
+        app:paddingStartAndEnd="10dp"
+        app:rulerStyle="TOP_HEAD"
+        app:scaleInterval="11.5dp"
+        app:smallScaleLength="20dp"
+        app:smallScaleWidth="1.5dp"
+        app:textMarginHead="80dp" />
+
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/shape_rect"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:text="下一步"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+</LinearLayout>
