@@ -21,7 +21,9 @@ import com.techdev_michael.step_counter.step.utils.DbUtils;
 
 import java.util.List;
 
-
+/**
+ *  历史数据页面
+ */
 public class HistoryActivity extends AppCompatActivity {
     private LinearLayout layout_titlebar;
     private ImageView iv_left;
@@ -51,6 +53,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void initData() {
         setEmptyView(lv);
+        // 如果数据库为空，则初始化数据库
         if(DbUtils.getLiteOrm()==null){
             DbUtils.createDb(this, "jingzhi");
         }

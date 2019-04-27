@@ -26,10 +26,29 @@ import com.techdev_michael.step_counter.view.StepArcView;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     *  界面显示的文本，分别为 查看历史步数、跑步步数、走路步数、运动距离、消耗卡路里数
+     */
     private TextView tv_data, tvRunSteps, tvWalkSteps, tvDistance, tvCalorieCost;
+
+    /**
+     *  显示步数的环形条
+     */
     private StepArcView cc;
+
+    /**
+     * 设置锻炼计划
+     */
     private TextView tv_set;
+
+    /**
+     * 查看历史步数
+     */
     private TextView tv_isSupport;
+
+    /**
+     *  本地存储数据的工具类
+     */
     private SharedPreferencesUtils sp;
 
     private static final String DEFAULT_TARGET_STEPS = "7000";
@@ -159,6 +178,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
 
 
+    /**
+     *  更新仪表板数据
+     * @param targetSteps 目标步数
+     * @param totalSteps 今日总步数
+     * @param runSteps 跑步步数
+     */
     @SuppressLint("DefaultLocale")
     private void updateDashborad(String targetSteps, int totalSteps, int runSteps) {
 

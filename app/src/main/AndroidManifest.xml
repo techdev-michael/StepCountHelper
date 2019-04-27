@@ -27,7 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.HeightSetActivity"></activity>
+        <activity android:name=".activity.HeightSetActivity"/>
         <activity android:name=".activity.WeightSetActivity" />
         <activity android:name=".activity.AgeSetActivity" />
         <activity android:name=".activity.GenderSetActivity" />
