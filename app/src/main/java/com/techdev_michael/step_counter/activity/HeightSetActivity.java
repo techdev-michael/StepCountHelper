@@ -17,12 +17,17 @@ import yanzhikai.ruler.BooheeRuler;
 import yanzhikai.ruler.RulerCallback;
 import yanzhikai.ruler.Utils.RulerStringUtil;
 
+/**
+ *  身高设置页面
+ */
 public class HeightSetActivity extends AppCompatActivity {
+
+    //可以滑动的尺子
     private BooheeRuler br_top_head;
     private HeightNumberLayout knl_top_head;
 
     private ImageView ivReplace;
-
+    // 下一步按钮
     private TextView tvNext;
 
     private float scale;
@@ -38,9 +43,9 @@ public class HeightSetActivity extends AppCompatActivity {
         tvNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // 保存设置好的身高数据
                 SPUtils.getInstance().put(Constant.HEIGHT, Integer.valueOf(RulerStringUtil.resultValueOf(scale, br_top_head.getFactor())));
-
+                // 跳转回到主页面
                 startActivity(new Intent(HeightSetActivity.this, MainActivity.class));
 
             }

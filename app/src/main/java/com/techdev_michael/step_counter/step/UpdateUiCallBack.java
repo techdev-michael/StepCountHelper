@@ -4,7 +4,6 @@ import com.techdev_michael.step_counter.step.bean.State;
 
 /**
  * 步数更新回调
- * Created by dylan on 16/9/27.
  */
 public interface UpdateUiCallBack {
     /**
@@ -14,6 +13,10 @@ public interface UpdateUiCallBack {
      */
     void updateUi(int stepCount,int runStepCount);
 
+    /**
+     *  更新当前运动状态，如跑步、走路
+     * @param state
+     */
     void updateState(State state);
 
 }

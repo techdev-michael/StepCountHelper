@@ -9,8 +9,8 @@ import android.widget.BaseAdapter;
 import java.util.List;
 
 /**
- * Created by yuandl on 2016-10-13.
- * 万能适配器
+ *  显示数据的列表
+ *
  */
 
 public abstract class CommonAdapter<T> extends BaseAdapter {

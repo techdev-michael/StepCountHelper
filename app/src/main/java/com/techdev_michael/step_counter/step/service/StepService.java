@@ -37,7 +37,7 @@ public class StepService extends Service implements SensorEventListener {
 
     private String TAG = "StepService";
     /**
-     * 默认为30秒进行一次存储
+     * 默认为30秒进行一次存储操作，记录步数数据
      */
     private static int duration = 30 * 1000;
     /**
@@ -231,7 +231,7 @@ public class StepService extends Service implements SensorEventListener {
 
 
     /**
-     * 监听晚上0点变化初始化数据
+     * 监听晚上0点变化初始化数据，即清空头一天的计步数据并更新页面
      */
     private void isNewDay() {
         String time = "00:00";
@@ -600,7 +600,9 @@ public class StepService extends Service implements SensorEventListener {
         }
     }
 
-
+    /**
+     *  计步服务销毁
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -611,6 +613,7 @@ public class StepService extends Service implements SensorEventListener {
         Logger.d("stepService关闭");
     }
 
+    // 解除和页面的绑定
     @Override
     public boolean onUnbind(Intent intent) {
         return super.onUnbind(intent);

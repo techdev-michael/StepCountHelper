@@ -16,13 +16,18 @@ import yanzhikai.ruler.KgNumberLayout;
 import yanzhikai.ruler.RulerCallback;
 import yanzhikai.ruler.Utils.RulerStringUtil;
 
+/**
+ *  体重设置页面
+ */
 public class WeightSetActivity extends AppCompatActivity {
 
+    // 可以滑动的尺子
     private BooheeRuler br_top_head;
     private KgNumberLayout knl_top_head;
 
     private ImageView ivReplace;
 
+    //下一步按钮
     private TextView tvNext;
 
     private float scale;
@@ -39,9 +44,9 @@ public class WeightSetActivity extends AppCompatActivity {
         tvNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // 保存设置好的体重数据
                 SPUtils.getInstance().put(Constant.WEIGHT, Float.valueOf(RulerStringUtil.resultValueOf(scale, br_top_head.getFactor())));
-
+                // 跳转到身高设置页面
                 startActivity(new Intent(WeightSetActivity.this,HeightSetActivity.class));
             }
         });

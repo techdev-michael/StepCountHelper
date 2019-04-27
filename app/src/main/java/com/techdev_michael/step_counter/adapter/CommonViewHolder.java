@@ -5,10 +5,8 @@ import android.util.SparseArray;
 import android.view.View;
 
 /**
- * Created by yuandl on 2016-10-13.
- * 万能的ViewHolder
+ *  显示数据的列表，用于重用列表显示的每个条目，为了提高性能
  *
- * @author
  */
 public class CommonViewHolder {
     /**

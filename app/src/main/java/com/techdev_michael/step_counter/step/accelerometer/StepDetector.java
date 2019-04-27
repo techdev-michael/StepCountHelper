@@ -1,8 +1,6 @@
 package com.techdev_michael.step_counter.step.accelerometer;
 
-/**
- * Created by dylan on 16/9/27.
- */
+
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,10 +8,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import com.blankj.utilcode.util.LogUtils;
-/*
- * 算法的主要部分,检测是否是步点
- * */
 
+/**
+ *   实现计步算法的核心类文件
+ */
 public class StepDetector implements SensorEventListener {
 
     private static final String TAG = StepDetector.class.getSimpleName();
@@ -55,6 +53,10 @@ public class StepDetector implements SensorEventListener {
     private StepCountListener mStepListeners;
 
 
+    /**
+     *  传感器检测到变化的回调方法
+     * @param event
+     */
     @Override
     public void onSensorChanged(SensorEvent event) {
 
@@ -105,7 +107,11 @@ public class StepDetector implements SensorEventListener {
         }
     }
 
-
+    /**
+     *  精确度发生变化的方法回调，目前无用处
+     * @param sensor
+     * @param accuracy
+     */
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
@@ -115,12 +121,16 @@ public class StepDetector implements SensorEventListener {
 
     }
 
+    /**
+     *  设置计步服务监听器
+     * @param listener
+     */
     public void initListener(StepCountListener listener) {
         this.mStepListeners = listener;
     }
 
 
-    /*
+    /**
      * 检测步子，并开始计步
      *  1.传入 sensor 中的数据
      *  2.如果检测到了波峰，并且符合时间差以及阈值的条件，则判定为1步
@@ -163,7 +173,7 @@ public class StepDetector implements SensorEventListener {
         gravityOld = values;
     }
 
-    /*
+    /**
      * 检测波峰
      * 以下四个条件判断为波峰：
      * 1.目前点为下降的趋势：isDirectionUp为false
@@ -197,7 +207,7 @@ public class StepDetector implements SensorEventListener {
         }
     }
 
-    /*
+    /**
      * 阈值的计算
      * 1.通过波峰波谷的差值计算阈值
      * 2.记录4个值，存入tempValue[]数组中
@@ -219,7 +229,7 @@ public class StepDetector implements SensorEventListener {
 
     }
 
-    /*
+    /**
      * 梯度化阈值
      * 1.计算数组的均值
      * 2.通过均值将阈值梯度化在一个范围里

@@ -3,7 +3,7 @@ package com.techdev_michael.step_counter.step.accelerometer;
 import com.techdev_michael.step_counter.step.bean.State;
 
 /**
- * Created by dylan on 16/9/27.
+ *  传递计步数据的监听器
  */
 public interface StepValuePassListener {
 

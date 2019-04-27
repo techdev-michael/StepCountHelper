@@ -28,6 +28,8 @@ public class HistoryActivity extends AppCompatActivity {
     private LinearLayout layout_titlebar;
     private ImageView iv_left;
     private ImageView iv_right;
+
+    // 显示历史数据的列表
     private ListView lv;
 
     private void assignViews() {

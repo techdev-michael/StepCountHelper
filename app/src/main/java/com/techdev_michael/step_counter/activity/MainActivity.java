@@ -22,7 +22,7 @@ import com.techdev_michael.step_counter.util.CalorieCostCalculator;
 import com.techdev_michael.step_counter.view.StepArcView;
 
 /**
- * 记步主页
+ *  记步页面的主页
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -51,9 +51,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private SharedPreferencesUtils sp;
 
+    /**
+     *  设置默认的锻炼计划为 7000 步
+     */
     private static final String DEFAULT_TARGET_STEPS = "7000";
 
-
+    /**
+     *  初始化布局，即将页面上的文字内容进行填充
+     */
     private void assignViews() {
 
         tv_data = findViewById(R.id.tv_data);
@@ -67,10 +72,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); // 设置页面布局
         assignViews();
         initData();
         addListener();
@@ -93,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvDistance.setOnClickListener(this);
     }
 
+    /**
+     *  初始化数据，设置锻炼计划
+     */
     private void initData() {
         sp = new SharedPreferencesUtils(this);
         //获取用户设置的计划锻炼步数，没有设置过的话默认7000
@@ -100,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //设置当前步数为0
         cc.setCurrentCount(Integer.parseInt(planWalk_QTY), 0);
         tv_isSupport.setText("计步中...");
+
+        // 开始运行后台服务进行计步
         setupService();
     }
 
@@ -107,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean isBind = false;
 
     /**
-     * 开启计步服务
+     *  开启计步服务
      */
     private void setupService() {
         Intent intent = new Intent(this, StepService.class);
@@ -117,9 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * 用于查询应用服务（application Service）的状态的一种interface，
-     * 更详细的信息可以参考Service 和 context.bindService()中的描述，
-     * 和许多来自系统的回调方式一样，ServiceConnection的方法都是进程的主线程中调用的。
+     *  创建计步服务，每次有计步数据发生变化时就更新页面显示
      */
     ServiceConnection conn = new ServiceConnection() {
         /**
@@ -137,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (null != stepRecord && stepRecord.length == 2) {
                 int runStepCount = stepRecord[1];
                 int stepCount = stepRecord[0];
-
+                // 更新页面上的计步数据
                 updateDashborad(planWalk_QTY, stepCount, runStepCount);
             }
 
@@ -145,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             stepService.registerCallback(new UpdateUiCallBack() {
                 @Override
                 public void updateUi(int stepCount, int runStepCount) {
-
+                    // 更新页面上的计步数据
                     String planWalk_QTY = (String) sp.getParam("planWalk_QTY", DEFAULT_TARGET_STEPS);
                     updateDashborad(planWalk_QTY, stepCount, runStepCount);
                 }
@@ -166,10 +175,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         /**
-         * 当与Service之间的连接丢失的时候会调用该方法，
-         * 这种情况经常发生在Service所在的进程崩溃或者被Kill的时候调用，
-         * 此方法不会移除与Service的连接，当服务重新启动的时候仍然会调用 onServiceConnected()。
-         * @param name 丢失连接的组件名称
+         * 和计步服务断开
          */
         @Override
         public void onServiceDisconnected(ComponentName name) {
@@ -187,18 +193,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("DefaultLocale")
     private void updateDashborad(String targetSteps, int totalSteps, int runSteps) {
 
+        // 设置当前步数
         cc.setCurrentCount(Integer.valueOf(targetSteps), totalSteps);
+        // 设置跑步步数
         tvRunSteps.setText(String.valueOf(runSteps));
+        // 设置步行步数
         tvWalkSteps.setText(String.valueOf(totalSteps - runSteps < 0 ? 0 : totalSteps - runSteps));
 
+        // 获取第一次打开页面时输入的性别信息
         int sex = SPUtils.getInstance().getInt(Constant.SEX, -1);
+        // 获取第一次打开页面时输入的身高信息
         int height = SPUtils.getInstance().getInt(Constant.HEIGHT, -1);
+        // 获取第一次打开页面时输入的体重信息
         float weight = SPUtils.getInstance().getFloat(Constant.WEIGHT, -1);
 
         if (-1 == sex || height == -1 || weight == -1) {
+            // 没有设置性别、身高、体重的话就显示“--”
             tvDistance.setText("--/--");
             tvCalorieCost.setText("--/--");
         } else {
+            // 计算运动距离和卡路里消耗，并显示到界面上
             tvDistance.setText(String.format("%.3f km", CalorieCostCalculator.calcDistance(totalSteps, sex, height)));
             tvCalorieCost.setText(String.format("%.2f kcal", CalorieCostCalculator.calcCaloriesCost(weight, totalSteps)));
         }
@@ -209,15 +223,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_set:
+                // 跳转到设置锻炼计划页面
                 startActivity(new Intent(this, SetPlanActivity.class));
                 break;
             case R.id.tv_data:
+                // 跳转到历史步数界面
                 startActivity(new Intent(this, HistoryActivity.class));
                 break;
 
             case R.id.tv_calorie_cost:
             case R.id.tv_distance:
-
+                // 如果没有设置性别、身高、体重，则点击卡路里消耗和运动里程则会跳转到设置页面
                 int sex = SPUtils.getInstance().getInt(Constant.SEX, -1);
                 int height = SPUtils.getInstance().getInt(Constant.HEIGHT, -1);
                 float weight = SPUtils.getInstance().getFloat(Constant.WEIGHT, -1);
@@ -238,6 +254,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onDestroy() {
         super.onDestroy();
         if (isBind) {
+            // 页面销毁时，解除计步服务的绑定
             this.unbindService(conn);
         }
     }

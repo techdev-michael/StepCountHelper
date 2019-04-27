@@ -6,6 +6,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 
+/**
+ *  监听计步的服务
+ */
 public class StepsDetectService extends Service {
 	
 	private SensorManager mSensorManager;

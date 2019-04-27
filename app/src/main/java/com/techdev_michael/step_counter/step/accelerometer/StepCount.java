@@ -7,17 +7,15 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 import com.techdev_michael.step_counter.step.bean.State;
 
-/**
- * Created by dylan on 16/9/27.
- */
 
-/*
- * 根据StepDetector传入的步点"数"步子
+
+/**
+ *  计算有效步数，将无效的步数去除掉
  * */
 public class StepCount implements StepCountListener {
 
     private int count = 0;
-    private int mCount = 0;
+    private int mCount = 0; // 有效步数
     private StepValuePassListener mStepValuePassListener;
     private long timeOfLastPeak = 0;
     private long timeOfThisPeak = 0;
@@ -27,6 +25,9 @@ public class StepCount implements StepCountListener {
 
     private static final int AVERAGE_STEP_DURATION_COUNTER = 5;
 
+    /**
+     *  队列，用来存储最近 5 次的步数
+     */
     private Queue<Long> intervalQueue = new ArrayBlockingQueue<>(AVERAGE_STEP_DURATION_COUNTER);
     private int runSteps = 0 ;
 
@@ -39,7 +40,7 @@ public class StepCount implements StepCountListener {
         return stepDetector;
     }
 
-    /*
+    /**
      * 连续走十步才会开始计步
      * 连续走了9步以下,停留超过3秒,则计数清空
      * */
@@ -53,7 +54,7 @@ public class StepCount implements StepCountListener {
 
         if (diff <= 3000L) {
 
-            //  根据前四个步伐耗时平均值判断是跑步还是走路
+            //  根据前五个步伐耗时平均值判断是跑步还是走路
             if (intervalQueue.size() < AVERAGE_STEP_DURATION_COUNTER) {
                 intervalQueue.add(diff);
             } else {
@@ -108,17 +109,25 @@ public class StepCount implements StepCountListener {
         this.mStepValuePassListener = listener;
     }
 
+    /**
+     *  通知界面当前运动状态发生了变化
+     */
     public void notifyStateChanged() {
         if (this.mStepValuePassListener != null)
             this.mStepValuePassListener.stateChanged(this.mState);
     }
 
+    /**
+     *  通知界面当前步数
+     */
     public void notifyListener() {
         if (this.mStepValuePassListener != null)
             this.mStepValuePassListener.stepChanged(this.mCount,this.runSteps);
     }
 
-
+    /**
+     *  重新计算步数
+     */
     public void setSteps(int initValue,int runSteps) {
         this.mCount = initValue;
         this.runSteps = runSteps;

@@ -3,7 +3,7 @@ package com.techdev_michael.step_counter.util;
 public class CalorieCostCalculator {
 
     /**
-     * 计算卡路里消耗
+     *  根据身高、步数计算卡路里消耗
      *
      * @param weight
      * @param steps

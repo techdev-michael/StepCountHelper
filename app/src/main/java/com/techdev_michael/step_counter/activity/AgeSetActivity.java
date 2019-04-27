@@ -18,13 +18,19 @@ import yanzhikai.ruler.KgNumberLayout;
 import yanzhikai.ruler.RulerCallback;
 import yanzhikai.ruler.Utils.RulerStringUtil;
 
+/**
+ *  设置年龄的页面
+ */
 public class AgeSetActivity extends AppCompatActivity {
 
+    // 可以滑动的尺子
     private BooheeRuler br_top_head;
     private AgeNumberLayout knl_top_head;
 
+    // 显示的小人图片
     private ImageView ivReplace;
 
+    // 下一步按钮
     private TextView tvNext;
 
     private float scale;
@@ -41,9 +47,9 @@ public class AgeSetActivity extends AppCompatActivity {
         tvNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // 保存设置好的年龄
                 SPUtils.getInstance().put(Constant.AGE, Integer.valueOf(RulerStringUtil.resultValueOf(scale, br_top_head.getFactor())));
-
+                // 跳转到设置体重的页面
                 startActivity(new Intent(AgeSetActivity.this, WeightSetActivity.class));
             }
         });

@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by yuandl on 2016-10-18.
+ *  设置锻炼计划的页面
  */
 
 public class SetPlanActivity extends AppCompatActivity implements View.OnClickListener {

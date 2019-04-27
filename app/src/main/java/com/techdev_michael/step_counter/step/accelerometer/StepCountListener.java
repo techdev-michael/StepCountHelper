@@ -1,7 +1,7 @@
 package com.techdev_michael.step_counter.step.accelerometer;
 
 /**
- * Created by dylan on 16/9/27.
+ *  计步服务的监听
  */
 public interface StepCountListener {
     void countStep();
