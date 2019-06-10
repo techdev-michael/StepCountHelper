@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /**
      *  界面显示的文本，分别为 查看历史步数、跑步步数、走路步数、运动距离、消耗卡路里数
      */
-    private TextView tv_data, tvRunSteps, tvWalkSteps, tvDistance, tvCalorieCost;
+    private TextView tv_data, tvRunSteps, tvWalkSteps, tvDistance, tvCalorieCost,tvPersonalData;
 
     /**
      *  显示步数的环形条
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvWalkSteps = findViewById(R.id.tv_walk_steps);
         tvDistance = findViewById(R.id.tv_distance);
         tvCalorieCost = findViewById(R.id.tv_calorie_cost);
-
+        tvPersonalData = findViewById(R.id.tv_personal_data);
     }
 
 
@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_data.setOnClickListener(this);
         tvCalorieCost.setOnClickListener(this);
         tvDistance.setOnClickListener(this);
+        tvPersonalData.setOnClickListener(this);
     }
 
     /**
@@ -243,7 +244,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 break;
-
+            case R.id.tv_personal_data:
+                startActivity(new Intent(this, GenderSetActivity.class));
+                break;
             default:
                 break;
 
